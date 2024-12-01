@@ -31,6 +31,13 @@ async function run() {
     // step-2 connection
     const bookCollection = client.db('bookDB').collection('book');
 
+    // get step-3 sever data 
+    app.get('/book', async(req, res) => {
+      const cursor = bookCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
     // step-1 send to server side data
     app.post('/book', async(req, res) => {
      const newBook = req.body;
